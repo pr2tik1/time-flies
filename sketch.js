@@ -114,27 +114,34 @@ function drawTime() {
 
 function createDigitParticles(currentTime) {
     const digitParticles = [];
-    const startX = width / 6;
+    const startX = width / 5.5;
 
     for (let i = 0; i < currentTime.length; i++) {
         const digitPattern = digitLookupTable[currentTime[i]];
-        const targetY = height / 1.8;
+        const targetY = height / 1.75;
 
         for (let y = 0; y < 5; y++) {
             for (let x = 0; x < 4; x++) {
                 if (digitPattern[y * 4 + x]) {
-                    const targetX = startX + i * 70 + x * 15;
-                    const targetYPosition = targetY - (4 - y) * 15;
-                    const newParticle = new Particle(targetX, targetYPosition, true);
-                    digitParticles.push(newParticle);
+                    const baseX = startX + i * 70 + x * 10;
+                    const baseY = targetY - (4 - y) * 15;
+
+                    for (let j = 0; j < 3; j++) {
+                        const offsetX = random(-3, 3);
+                        const offsetY = random(-3, 3);
+                        const newParticle = new Particle(baseX + offsetX, baseY + offsetY, true);
+                        digitParticles.push(newParticle);
+                    }
                 }
             }
         }
     }
 
+    // Remove old digit particles and replace with new ones
     particles = particles.filter(p => !p.isDigit);
     particles.push(...digitParticles);
 }
+
 
 function createParticles() {
     const numBackgroundParticles = 250;
