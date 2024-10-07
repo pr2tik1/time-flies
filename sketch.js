@@ -3,7 +3,7 @@ let lastTime = "";
 let noiseScale = 0.01;
 
 function setup() {
-    createCanvas(700, 700);
+    createCanvas(500, 500);
     let canvas = document.querySelector('canvas');
     canvas.style.borderRadius = '50%';
     createParticles();
@@ -114,11 +114,11 @@ function drawTime() {
 
 function createDigitParticles(currentTime) {
     const digitParticles = [];
-    const startX = width / 4;
+    const startX = width / 6;
 
     for (let i = 0; i < currentTime.length; i++) {
         const digitPattern = digitLookupTable[currentTime[i]];
-        const targetY = height / 2;
+        const targetY = height / 1.8;
 
         for (let y = 0; y < 5; y++) {
             for (let x = 0; x < 4; x++) {
